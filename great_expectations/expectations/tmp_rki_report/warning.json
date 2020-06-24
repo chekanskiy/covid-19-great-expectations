@@ -1,0 +1,141 @@
+{
+  "data_asset_type": "Dataset",
+  "expectation_suite_name": "tmp_rki_report.warning",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_mean_to_be_between",
+      "kwargs": {
+        "column": "confirmed",
+        "max_value": 12500,
+        "min_value": 11900
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_median_to_be_between",
+      "kwargs": {
+        "column": "confirmed",
+        "max_value": 5500.0,
+        "min_value": 5000.0
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_quantile_values_to_be_between",
+      "kwargs": {
+        "allow_relative_error": false,
+        "column": "confirmed",
+        "quantile_ranges": {
+          "quantiles": [
+            0.05,
+            0.25,
+            0.5,
+            0.75,
+            0.95
+          ],
+          "value_ranges": [
+            [
+              1653,
+              1655
+            ],
+            [
+              3135,
+              3137
+            ],
+            [
+              5407,
+              5409
+            ],
+            [
+              10612,
+              10614
+            ],
+            [
+              41417,
+              41419
+            ]
+          ]
+        }
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_kl_divergence_to_be_less_than",
+      "kwargs": {
+        "bucketize_data": true,
+        "column": "confirmed",
+        "internal_weight_holdout": 0,
+        "partition_object": {
+          "bins": [
+            792.0,
+            12567.5,
+            24343.0,
+            36118.5,
+            47894.0
+          ],
+          "tail_weights": [
+            0.0,
+            0.0
+          ],
+          "weights": [
+            0.75,
+            0.0625,
+            0.0625,
+            0.125
+          ]
+        },
+        "tail_weight_holdout": 0,
+        "threshold": 1
+      },
+      "meta": {}
+    }
+  ],
+  "meta": {
+    "BasicSuiteBuilderProfiler": {
+      "batch_kwargs": {
+        "data_asset_name": "tmp_rki_report",
+        "datasource": "covid-silver",
+        "path": "/Users/chekanskiy/Documents/projects/covid-19-exploration/data-processed/tmp_rki_report.csv"
+      },
+      "created_at": 1593002623.917247,
+      "created_by": "BasicSuiteBuilderProfiler"
+    },
+    "citations": [
+      {
+        "batch_kwargs": {
+          "data_asset_name": "tmp_rki_report",
+          "datasource": "covid-silver",
+          "path": "/Users/chekanskiy/Documents/projects/covid-19-exploration/data-processed/tmp_rki_report.csv"
+        },
+        "batch_markers": {
+          "ge_load_time": "20200624T124343.801397Z",
+          "pandas_data_fingerprint": "bcbd16f27ec0f878a5368009185a8000"
+        },
+        "batch_parameters": null,
+        "citation_date": "20200624T124343.978775Z",
+        "comment": "BasicSuiteBuilderProfiler added a citation based on the current batch."
+      }
+    ],
+    "columns": {
+      "confirmed": {
+        "description": ""
+      },
+      "date": {
+        "description": ""
+      },
+      "dead": {
+        "description": ""
+      },
+      "land": {
+        "description": ""
+      }
+    },
+    "great_expectations.__version__": "0.11.5",
+    "notes": {
+      "content": [
+        "#### This is an _example_ suite\n\n- This suite was made by quickly glancing at 1000 rows of your data.\n- This is **not a production suite**. It is meant to show examples of expectations.\n- Because this suite was auto-generated using a very basic profiler that does not know your data like you do, many of the expectations may not be meaningful.\n"
+      ],
+      "format": "markdown"
+    }
+  }
+}
