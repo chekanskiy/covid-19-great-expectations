@@ -13,7 +13,8 @@ RUN apt-get update \
 
 RUN pip install \
         great_expectations \
-        sqlalchemy
+        sqlalchemy \
+        psycopg2-binary
 
 COPY great_expectations/metric_store.py /usr/local/lib/python3.7/site-packages/great_expectations/data_context/store/metric_store.py
 COPY . /

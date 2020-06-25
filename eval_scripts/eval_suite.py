@@ -1,27 +1,44 @@
 import great_expectations as ge
-import os
-
+# import os
 # PROJECT_PATH = os.environ.get("PROJECT_PATH")
-PROJECT_PATH = "/Users/chekanskiy/Documents/projects/covid-19-exploration"
 
-def validate_rki_report_parse(**kwargs):
-    # TODO Refactor to run GE in a container
-    # pass configs as parameters and do the actual work in a docker
-    # the goal is to distribute work and minimise work performed in Airflow
 
-    context = ge.data_context.DataContext()
-    batch_kwargs_file = {"path": os.path.join(PROJECT_PATH, "data-processed/tmp_rki_report.csv"),
-                         "datasource": "covid-silver"}
+def validate_rki_report_parse(configs):
 
-    batch_file = context.get_batch(batch_kwargs_file, "tmp_rki_report.error")
+    for config in configs["suites"]:
+        print(config)
+        context = ge.data_context.DataContext()
+        batch_kwargs_file = config["batch_kwargs"]
 
-    results = context.run_validation_operator(
-        "action_list_operator",
-        assets_to_validate=[batch_file],
-        run_id=f"airflow:{kwargs['dag']}:{kwargs['ds']}"
-    )
+        batch_file = context.get_batch(batch_kwargs_file, config["suit_name"])
 
-    if not results["success"]:
-        raise Exception("Validation of the source data is not successful")
+        results = context.run_validation_operator(
+            "action_list_operator",
+            assets_to_validate=[batch_file],
+            run_id=config["run_id"]
+        )
 
-validate_rki_report_parse()
+        if config["severity"] == "critical":
+            if not results["success"]:
+                raise Exception("Validation of the source data is not successful")
+
+
+if __name__ == "__main__":
+    import json
+    import argparse
+    from urllib.parse import unquote
+
+    # Set up CLI Arguments
+    parser = argparse.ArgumentParser()
+
+    # Required Arguments
+    parser.add_argument("-c", "--config", required=True,
+                        help="JSON configuration string for this operation")
+
+    # Grab the Arguments
+    args = parser.parse_args()
+
+    jsonString = unquote(args.config).replace("'", '"')
+    configs_parsed = json.loads(jsonString)
+
+    validate_rki_report_parse(configs_parsed)
