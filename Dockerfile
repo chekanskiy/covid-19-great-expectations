@@ -11,8 +11,10 @@ RUN apt-get update \
         /usr/share/doc \
         /usr/share/doc-base
 
+ARG GE_VERSION=0.11.6
+
 RUN pip install \
-        great_expectations \
+        great_expectations==${GE_VERSION} \
         sqlalchemy \
         psycopg2-binary
 
