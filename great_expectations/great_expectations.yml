@@ -168,10 +168,18 @@ data_docs_sites:
     show_how_to_buttons: false
     store_backend:
       class_name: TupleFilesystemStoreBackend
-#      base_directory: uncommitted/data_docs/local_site/
-      base_directory: /projects/covid-19-great-expectations/great_expectations/uncommitted/data_docs/local_site/
+      base_directory: uncommitted/data_docs/local_site/
     site_index_builder:
       class_name: DefaultSiteIndexBuilder
+#  docker_volume_site:
+#    class_name: SiteBuilder
+#    # set to false to hide how-to buttons in Data Docs
+#    show_how_to_buttons: false
+#    store_backend:
+#      class_name: TupleFilesystemStoreBackend
+#      base_directory: /projects/covid-19-great-expectations/great_expectations/uncommitted/data_docs/local_site/
+#    site_index_builder:
+#      class_name: DefaultSiteIndexBuilder
 
 anonymous_usage_statistics:
   data_context_id: db50e748-4fd8-4bf5-a56c-f4dd27f0b9a3

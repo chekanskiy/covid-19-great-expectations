@@ -52,7 +52,7 @@
             ],
             [
               41417,
-              41419
+              50000
             ]
           ]
         }
@@ -71,7 +71,7 @@
             12567.5,
             24343.0,
             36118.5,
-            47894.0
+            50000.0
           ],
           "tail_weights": [
             0.0,
@@ -86,6 +86,20 @@
         },
         "tail_weight_holdout": 0,
         "threshold": 1
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_parameterized_distribution_ks_test_p_value_to_be_greater_than",
+      "kwargs": {
+        "column": "confirmed",
+        "distribution": "norm",
+        "params": {
+          "loc": 0,
+          "mean": 12034.75,
+          "scale": 1,
+          "std_dev": 15391
+        }
       },
       "meta": {}
     }
